@@ -1,28 +1,26 @@
 package com.a4s.segundoprojeto.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+public class Product implements Serializable{
 
-public class Category implements Serializable{
-    
     private static final long serialVersionUID = 1L;
+    
+    private Long id;
+    private String descricao;
+    private Double valor;
 
-    private Long id; //sempre utilizar wrapper classe pois aceita valor nulo
-    private String name;
+    private Category category;
 
-    @JsonIgnore
-    private List<Product> products = new ArrayList<>();
-
-    public Category(){
+    public Product(){
 
     }
 
-    public Category(Long id, String name) {
+    public Product(Long id, String descricao, Double valor, Category category) {
         this.id = id;
-        this.name = name;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.category = category;
     }
 
     public Long getId() {
@@ -33,16 +31,28 @@ public class Category implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
-    
-    public List<Product> getProducts() {
-        return products;
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -61,7 +71,7 @@ public class Category implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Category other = (Category) obj;
+        Product other = (Product) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
