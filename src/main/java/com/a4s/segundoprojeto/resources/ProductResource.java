@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.a4s.segundoprojeto.entities.Product;
 import com.a4s.segundoprojeto.repositories.ProductRepository;
 
-@RestController
-@RequestMapping(value = "/products")
+@RestController //define que essa classe será reconhecida como um recurso Rest
+@RequestMapping(value = "/products") //http responde a esse caminho
 public class ProductResource {
 
-	@Autowired
+	@Autowired //Sempre que instanciar o Category Resource ele puxa automaticamente outra instancia do CategoryRepository
 	private ProductRepository productRepository;
 
-	@GetMapping
+	@GetMapping //Quando abrir o "/categories" vai abrir esse método
 	public ResponseEntity<List<Product>> findAll() {
 		List<Product> list = productRepository.findAll();
 		return ResponseEntity.ok().body(list);
@@ -27,7 +27,7 @@ public class ProductResource {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) {
-		Product cat = productRepository.findById(id);
+		Product cat = productRepository.findById(id).get();
 		return ResponseEntity.ok().body(cat);
 	}
 	
